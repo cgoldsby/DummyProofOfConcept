@@ -40,8 +40,16 @@ extension UINavigationController {
     func embeed(dummyPlayer: DummyPlayerViewController) {
         guard let navigationBar = navigationBar as? CustomNavigationBar else { return }
         dummyPlayer.view.frame = CGRect(x: 0, y: navigationBar.bounds.height, width: view.bounds.width, height: 200)
+        
         navigationBar.dummyPlayerContainterView.addSubview(dummyPlayer.view)
         addChild(dummyPlayer)
-        //navigationBar.sizeToFit()
+        dummyPlayer.didMove(toParent: self)
+    }
+    
+    func unembeedDummyPlayer() {
+        guard let navigationBar = navigationBar as? CustomNavigationBar else { return }
+        for subview in navigationBar.dummyPlayerContainterView.subviews {
+            subview.removeFromSuperview()
+        }
     }
 }

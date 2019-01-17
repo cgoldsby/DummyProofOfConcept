@@ -18,6 +18,15 @@ class FirstViewController: UIViewController {
         return embeedPlayerButton
     }()
     
+    private let unEmbeedPlayerButton: UIButton = {
+        let unEmbeedPlayerButton = UIButton()
+        unEmbeedPlayerButton.setTitle("Unembeed player", for: .normal)
+        unEmbeedPlayerButton.setTitleColor(.brown, for: .normal)
+        unEmbeedPlayerButton.addTarget(self, action: #selector(unEmbeedPlayerButtonWasPressed), for: .touchUpInside)
+        unEmbeedPlayerButton.isHidden = true
+        return unEmbeedPlayerButton
+    }()
+    
     private let pushButton: UIButton = {
         let pushButton = UIButton()
         pushButton.setTitle("Push me !", for: .normal)
@@ -26,6 +35,8 @@ class FirstViewController: UIViewController {
         return pushButton
     }()
     
+    let dummyPlayer = DummyPlayerViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .yellow
@@ -35,6 +46,11 @@ class FirstViewController: UIViewController {
         embeedPlayerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         embeedPlayerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
+        view.addSubview(unEmbeedPlayerButton)
+        unEmbeedPlayerButton.translatesAutoresizingMaskIntoConstraints = false
+        unEmbeedPlayerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        unEmbeedPlayerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
         view.addSubview(pushButton)
         pushButton.translatesAutoresizingMaskIntoConstraints = false
         pushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -43,8 +59,16 @@ class FirstViewController: UIViewController {
     
     @objc
     func embeedPlayerButtonWasPressed() {
-        let dummyPlayer = DummyPlayerViewController()
         navigationController?.embeed(dummyPlayer: dummyPlayer)
+        unEmbeedPlayerButton.isHidden = false
+        embeedPlayerButton.isHidden = true
+    }
+    
+    @objc
+    func unEmbeedPlayerButtonWasPressed() {
+        navigationController?.unembeedDummyPlayer()
+        unEmbeedPlayerButton.isHidden = true
+        embeedPlayerButton.isHidden = false
     }
     
     @objc
