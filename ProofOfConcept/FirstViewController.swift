@@ -55,18 +55,30 @@ class FirstViewController: UIViewController {
         pushButton.translatesAutoresizingMaskIntoConstraints = false
         pushButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         pushButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
+
+        title = "RootViewController"
     }
     
     @objc
     func embeedPlayerButtonWasPressed() {
-        navigationController?.embeed(dummyPlayer: dummyPlayer)
+        constraint?.constant = 320
+        UIView.animate(withDuration: 0.3) {
+            UIApplication.shared.windows.first?.rootViewController?.view?.layoutIfNeeded()
+//            self.view.superview?.layoutIfNeeded()
+        }
+//        navigationController?.embeed(dummyPlayer: dummyPlayer)
         unEmbeedPlayerButton.isHidden = false
         embeedPlayerButton.isHidden = true
     }
     
     @objc
     func unEmbeedPlayerButtonWasPressed() {
-        navigationController?.unembeedDummyPlayer()
+        constraint?.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            UIApplication.shared.windows.first?.rootViewController?.view?.layoutIfNeeded()
+        //            self.view.superview?.layoutIfNeeded()
+    }
+//        navigationController?.unembeedDummyPlayer()
         unEmbeedPlayerButton.isHidden = true
         embeedPlayerButton.isHidden = false
     }
