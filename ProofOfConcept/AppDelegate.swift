@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 private func 🛠(_ navigationController: UINavigationController) {
     let view = navigationController.view!
-    let navigationBarView = navigationController.view.subviews.last!
+    let navigationBarView = navigationController.navigationBar
     let containerView = navigationController.view.subviews.first!
 
     let playerContainerView = UIView()
